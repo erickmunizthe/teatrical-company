@@ -1,4 +1,5 @@
 const plays = require("../data/plays.json");
+const PerformanceCalculator = require("./peformanceCalculator");
 
 function createStatementData(invoice) {
   const statementData = {};
@@ -10,6 +11,7 @@ function createStatementData(invoice) {
 }
 
 function enrichPerformance(aPerformance) {
+  const calculator = new PerformanceCalculator(aPerformance);
   const result = Object.assign({}, aPerformance);
   result.play = playFor(result);
   result.amount = amountFor(result);
@@ -53,10 +55,12 @@ function volumeCreditsFor(aPerformance) {
 
 function totalVolumeCredits(data) {
   return data.performances.reduce((total, p) => total + p.volumeCredits, 0);
+
 }
 
 function totalAmount(data) {
   return data.performances.reduce((total, p) => total + p.amount, 0);
 }
+
 
 module.exports = createStatementData;
