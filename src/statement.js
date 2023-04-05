@@ -1,4 +1,4 @@
-const plays = require('../data/plays.json');
+const plays = require("../data/plays.json");
 
 function statement(invoice) {
   let totalAmount = 0;
@@ -10,10 +10,7 @@ function statement(invoice) {
     minimumFractionDigits: 2,
   }).format;
   for (let perf of invoice.performances) {
-    // add volume credits
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    // add extra credit for every ten comedy attendees
-    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+    volumeCredits += volumeCreditsFor(perf);
     // print line for this order
     result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${
       perf.audience
@@ -50,6 +47,13 @@ function amountFor(aPerformance) {
 function playFor(aPerformance) {
   return plays[aPerformance.playID];
 }
- 
+
+function volumeCreditsFor(aPerformance) {
+  let result = 0;
+  result += Math.max(aPerformance.audience - 30, 0);
+  if ("comedy" === playFor(aPerformance).type)
+    result += Math.floor(aPerformance.audience / 5);
+  return result;
+}
 
 module.exports = statement;
