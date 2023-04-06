@@ -1,7 +1,8 @@
-const renderPlainText = require("./src/statement.js");
-const invoices = require('./data/invoices.json');
-const plays = require('./data/plays.json');
+const { textStatement, htmlStatement } = require("./src/statement.js");
+const invoices = require("./data/invoices.json");
+const plays = require("./data/plays.json");
 
 for (let invoice of invoices) {
-    console.log(renderPlainText(invoice));
+  console.log(textStatement(invoice));
+  console.log(htmlStatement(invoice));
 }

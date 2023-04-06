@@ -5,7 +5,7 @@ class PerformanceCalculator {
   }
 
   get amount() {
-    throw new Error('subclass responsibility');
+    throw new Error("subclass responsibility");
   }
 
   get volumeCredits() {

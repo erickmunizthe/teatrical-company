@@ -1,6 +1,5 @@
 const plays = require("../data/plays.json");
 const ComedyCalculator = require("./model/ComedyCalculator");
-const PerformanceCalculator = require("./model/PerformanceCalculator");
 const TragedyCalculator = require("./model/TragedyCalculator");
 
 function createStatementData(invoice) {

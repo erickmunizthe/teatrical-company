@@ -1,6 +1,6 @@
 const createStatementData = require("./createStatementData");
 
-function statement(invoice) {
+function textStatement(invoice) {
   return renderPlainText(createStatementData(invoice));
 }
 
@@ -44,4 +44,4 @@ function usd(aNumber) {
   }).format(aNumber / 100);
 }
 
-module.exports = statement;
+module.exports = { textStatement, htmlStatement };
