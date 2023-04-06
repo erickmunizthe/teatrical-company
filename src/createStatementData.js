@@ -11,34 +11,16 @@ function createStatementData(invoice) {
 }
 
 function enrichPerformance(aPerformance) {
-  const calculator = new PerformanceCalculator(aPerformance);
+  const calculator = new PerformanceCalculator(aPerformance,playFor(aPerformance));
   const result = Object.assign({}, aPerformance);
-  result.play = playFor(result);
-  result.amount = amountFor(result);
-  result.volumeCredits = volumeCreditsFor(result);
+  result.play = calculator.play;
+  result.amount = calculator.amount;
+  result.volumeCredits = calculator.volumeCredits;
   return result;
 }
 
 function amountFor(aPerformance) {
-  let result = 0;
-  switch (aPerformance.play.type) {
-    case "tragedy":
-      result = 40000;
-      if (aPerformance.audience > 30) {
-        result += 1000 * (aPerformance.audience - 30);
-      }
-      break;
-    case "comedy":
-      result = 30000;
-      if (aPerformance.audience > 20) {
-        result += 10000 + 500 * (aPerformance.audience - 20);
-      }
-      result += 300 * aPerformance.audience;
-      break;
-    default:
-      throw new Error(`unknown type: ${aPerformance.play.type}`);
-  }
-  return result;
+  return new PerformanceCalculator(aPerformance, playFor(aPerformance)).amount;
 }
 
 function playFor(aPerformance) {
