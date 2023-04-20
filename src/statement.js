@@ -2,8 +2,8 @@ const plays = require("../data/plays.json");
 const createStatementData = require("./createStatementData");
 
 function statement(invoice) {
-  //return renderPlainText(createStatementData(invoice));
-  return renderHtml(createStatementData(invoice));
+  return renderPlainText(createStatementData(invoice));
+  //return renderHtml(createStatementData(invoice));
 }
 
 function renderPlainText(data) {
